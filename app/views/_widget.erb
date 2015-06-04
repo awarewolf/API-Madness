@@ -1,0 +1,319 @@
+<div ng-controller="PlayerWidgetCtrl" class="widget-container ng-scope">
+   <div ng-class="{ 'repostable': !!player.repostUrl, 'tracklist': !playerWidget.widgetOptions.hide_tracklist, 'dark': !playerWidget.widgetOptions.light, 'hide-artwork': playerWidget.widgetOptions.hide_artwork, 'show-artwork': !playerWidget.widgetOptions.hide_artwork, 'blur': playerWidget.showList || playerWidget.showShare, 'widget-is-playing': player.playing, 'widget-mini': playerWidget.widgetOptions.mini, 'not-widget-mini': !playerWidget.widgetOptions.mini, 'mini-next': playerWidget.widgetOptions.mini &amp;&amp; playerWidget.cloudcastList.length > 1 }" class="widget not-widget-mini dark show-artwork repostable">
+      <div class="cover-image" ng-hide="playerWidget.hideCover || playerWidget.widgetOptions.hide_cover" style="background-image: url(//images-mix.netdna-ssl.com/w/600/h/600/q/85/upload/images/extaudio/22da84ed-c399-4fbc-b816-37b0e2f21354.png); background-color:#FFFFFF;" ng-click="playerWidget.hideCover=true; player.togglePlayClick()">
+         <div class="cover-title-background" m-stop-propagation="click"><a class="cover-title" href="/LaidBackRadio/bmm-essentials/">BMM Essentials</a><a class="cover-by" href="/LaidBackRadio/">by LDBK</a></div>
+         <div class="cover-play cover-play-border-full larger-play-button-test"></div>
+         <a class="cover-image-logo" href="/LaidBackRadio/bmm-essentials/" title="Mixcloud"></a>
+      </div>
+      <div class="widget-header">
+         <a href="/LaidBackRadio/bmm-essentials/" ng-href="/LaidBackRadio/bmm-essentials/" class="widget-cloudcast-image" ng-hide="playerWidget.widgetOptions.hide_artwork"><img src="//images-mix.netdna-ssl.com/w/180/h/180/q/85/upload/images/extaudio/22da84ed-c399-4fbc-b816-37b0e2f21354.png" ng-src="//images-mix.netdna-ssl.com/w/180/h/180/q/85/upload/images/extaudio/22da84ed-c399-4fbc-b816-37b0e2f21354.png" width="180" height="180"></a>
+         <div class="widget-controls">
+            <div class="widget-controls-top">
+               <div class="playback-error-message ng-hide" ng-show="player.error">
+                  <h5 class="player-error-title">Oh snap, there was a playback error!</h5>
+                  <p class="player-error-desc">Press play to try again.</p>
+               </div>
+               <div class="playback-error-message playback-license-message ng-hide" ng-show="player.playAttempted &amp;&amp; playerWidget.restrictedReason">
+                  <div class="playback-license-icon license-icon-info"></div>
+                  <p class="player-error-desc"><span ng-show="playerWidget.restrictedReason=='soundexchange_repeat_play'" class="ng-hide">This upload is no longer available due to<br>licensing restrictions.&nbsp;<a href="http://support.mixcloud.com/customer/portal/articles/1590288-us-licensing-archive-cloudcast-listening">Why?</a></span><span ng-show="playerWidget.restrictedReason=='tracklist'" class="ng-hide">This upload is unavailable in your country<br>due to licensing restrictions.&nbsp;<a href="http://support.mixcloud.com/customer/portal/articles/1595566-us-licensing-sound-recording-complement-rule">Why?</a></span></p>
+               </div>
+               <div class="widget-play-button" m-player-play-button="" ng-class="{ 'widget-loading': player.buffering, 'spin': player.buffering, 'widget-pause-button': player.playing &amp;&amp; !player.buffering }"></div>
+               <div class="widget-title-container">
+                  <a href="/LaidBackRadio/bmm-essentials/" ng-href="/LaidBackRadio/bmm-essentials/" class="widget-title ng-binding" ng-bind="player.currentCloudcast.title">BMM Essentials</a>
+                  <div class="widget-by"><span class="widget-by-word">by</span><a class="widget-by-user ng-binding" ng-href="/LaidBackRadio/" ng-bind="player.currentCloudcast.owner" href="/LaidBackRadio/">LDBK</a><span class="follow-button ng-scope ng-binding ng-hide" ng-hide="player.isFollowing || player.hideFollow" m-toggled="true" m-ajax-toggle="" m-logged-in-only="" m-ref="player_widget" m-ajax-toggle-url-on="/LaidBackRadio/follow/" m-ajax-toggle-url-off="/LaidBackRadio/unfollow/" ng-bind="toggled &amp;&amp; 'Following' || (player.followBack &amp;&amp; 'Follow Back' || 'Follow')">Following</span></div>
+               </div>
+               <div class="mini-share-container" ng-hide="playerWidget.isUnlisted">
+                  <div class="repost ng-scope" m-tooltip-left="Repost" ng-show="!!player.repostUrl" ng-class="{ 'reposted': toggled }" m-toggled="false" m-ajax-toggle="" m-logged-in-only="" m-ajax-toggle-url-on="/repost/LaidBackRadio/bmm-essentials/" m-ajax-toggle-url-off="/repost/LaidBackRadio/bmm-essentials/delete/" m-ref="player_widget"></div>
+                  <div class="fave ng-scope" m-tooltip-left="Favorite" ng-class="{ 'faved': toggled }" ng-show="!!player.favoriteUrl" m-toggled="false" m-ajax-toggle="" m-chained-action-on="favorite" m-logged-in-only="" m-ajax-toggle-url-on="/favorites/LaidBackRadio/bmm-essentials/favorite/" m-ajax-toggle-url-off="/favorites/LaidBackRadio/bmm-essentials/unfavorite/"></div>
+                  <div class="share ng-scope" m-tooltip-left="Share" m-click="playerWidget.showShare=true"></div>
+               </div>
+               <div m-click="playerWidget.nextCloudcast()" m-tooltip-left="Next" class="next-mix ng-scope"></div>
+               <a href="/LaidBackRadio/bmm-essentials/" ng-href="/LaidBackRadio/bmm-essentials/" m-widget-logo="" class="widget-logo" title="Mixcloud"></a>
+            </div>
+            <div class="widget-controls-mid" m-widget-controls-mid="" ng-class="{ 'current-track-show': !!player.nowPlaying.currentDisplayTrack.title &amp;&amp; player.playerStarted || player.playingPreroll }">
+               <div class="current-track ng-hide" ng-show="!!player.nowPlaying.currentDisplayTrack.title &amp;&amp; player.playerStarted &amp;&amp; !player.playingPreroll"><span class="current-track-text"><strong ng-bind="player.nowPlaying.currentDisplayTrack.title" ng-class="{ 'playing': player.playing &amp;&amp; !player.buffering }" class="current-track-title ng-binding"></strong><span class="current-track-artist">&nbsp;by&nbsp;<span ng-bind="player.nowPlaying.currentDisplayTrack.artist" class="ng-binding"></span></span><a ng-href="" ng-show="player.nowPlaying.currentDisplayTrack.buyUrl" class="buy-current-track ng-hide">&nbsp; — Buy</a></span></div>
+               <div class="current-track ng-hide" ng-show="player.playingPreroll"><span class="current-track-text">Starting in <span ng-bind="player.audioLength - player.audioPosition" class="ng-binding">2918</span>...</span></div>
+               <div class="widget-scrubber-container ng-scope" m-player-time="">
+                  <span class="current ng-binding" ng-bind="sliderAudioPosition|hmmss">00:00</span>
+                  <div class="widget-scrubber">
+                     <div class="widget-scrubber-bar">
+                        <div class="widget-buffer-bar" m-style-width="player.latestSeekablePosition|percentageComplete:player.audioLength" m-slider-container="">
+                           <div class="widget-progress" m-style-width="sliderAudioPosition|percentageComplete:player.latestSeekablePosition">
+                              <div class="widget-current-position" m-slider-button=""></div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <span class="remaining">-<span ng-bind="timeRemaining()|hmmss" class="ng-binding">48:38</span></span>
+               </div>
+               <div ng-hide="playerWidget.isUnlisted" class="widget-controls-mid-icon-container">
+                  <div class="repost ng-scope" m-tooltip-left="Repost" ng-show="!!player.repostUrl" ng-class="{ 'reposted': toggled }" m-toggled="false" m-ajax-toggle="" m-logged-in-only="" m-ajax-toggle-url-on="/repost/LaidBackRadio/bmm-essentials/" m-ajax-toggle-url-off="/repost/LaidBackRadio/bmm-essentials/delete/" m-ref="player_widget"></div>
+                  <div class="fave ng-scope" m-tooltip="Favorite" ng-class="{ 'faved': toggled, disabled: !player.favoriteUrl }" m-toggled="false" m-ajax-toggle="" m-chained-action-on="favorite" m-logged-in-only="" m-ajax-toggle-url-on="/favorites/LaidBackRadio/bmm-essentials/favorite/" m-ajax-toggle-url-off="/favorites/LaidBackRadio/bmm-essentials/unfavorite/"></div>
+                  <div class="share ng-scope" m-tooltip="Share" m-click="playerWidget.showShare=true"></div>
+               </div>
+            </div>
+            <div class="widget-controls-bottom cf">
+               <span class="play-count ng-scope ng-binding" m-tooltip="Listens" ng-hide="!player.currentCloudcast.showStats" ng-bind="player.currentCloudcast.playCount|number">13,547</span><span class="favourite-count ng-scope ng-binding" m-tooltip="Favorites" ng-hide="!player.currentCloudcast.showStats" ng-bind="player.currentCloudcast.favoriteCount|number">407</span><span class="repost-count ng-scope ng-binding" m-tooltip="Reposts" ng-bind="player.currentCloudcast.repostCount|number" ng-hide="player.currentCloudcast.repostCount==0 || !player.currentCloudcast.showStats">3</span>
+               <div class="show-list ng-hide" m-click="playerWidget.showList = true" ng-show="playerWidget.cloudcastList.length > 1">Up Next</div>
+               <div class="widget-controls-bottom-buttons">
+                  <div class="fave-button-bottom-row ng-scope ng-binding" ng-hide="!player.favoriteUrl || !player.currentCloudcast.showStats" ng-class="{ 'faved': toggled }" m-toggled="false" m-ajax-toggle="" m-chained-action-on="favorite" m-logged-in-only="" m-ajax-toggle-url-on="/favorites/LaidBackRadio/bmm-essentials/favorite/" m-ajax-toggle-url-off="/favorites/LaidBackRadio/bmm-essentials/unfavorite/" m-ajax-toggle-count="407" ng-bind="toggleCount|intSi">407</div>
+                  <div class="repost-button-bottom-row ng-scope ng-binding" ng-hide="!player.repostUrl || !player.currentCloudcast.showStats" ng-class="{ 'reposted': toggled }" m-toggled="false" m-ajax-toggle="" m-logged-in-only="" m-ajax-toggle-url-on="/repost/LaidBackRadio/bmm-essentials/" m-ajax-toggle-url-off="/repost/LaidBackRadio/bmm-essentials/delete/" m-ref="player_widget" m-ajax-toggle-count="3" ng-bind="toggleCount|intSi">3</div>
+                  <div class="fave-button-bottom-row ng-hide disabled ng-binding" ng-show="!player.favoriteUrl &amp;&amp; player.currentCloudcast.showStats" ng-bind="player.currentCloudcast.favoriteCount|intSi">407</div>
+                  <div class="repost-button-bottom-row ng-hide disabled ng-binding" ng-show="!player.repostUrl &amp;&amp; player.currentCloudcast.showStats" ng-bind="player.currentCloudcast.repostCount|intSi">3</div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="ng-hide widget-tracklist-container" ng-hide="playerWidget.widgetOptions.hide_tracklist">
+         <div class="widget-tracklist-row widget-notracklist-row  ng-hide" ng-show="player.shouldHideTracklist &amp;&amp; player.currentCloudcast.featuringArtists &amp;&amp; player.currentCloudcast.featuringArtists.length > 0">
+            <div class="widget-tracklist-song">
+               <div class="widget-title tracklist-not-visible ng-hide" ng-show="player.currentCloudcast.featuringArtists &amp;&amp; player.currentCloudcast.featuringArtists.length > 0">
+                  This show features tracks by <!-- ngRepeat: artist in player.currentCloudcast.featuringArtists --><span ng-show="player.currentCloudcast.moreFeaturingArtists" class="ng-hide"> and more</span>.
+               </div>
+               <div class="widget-by tracklist-not-visible">Keep listening to reveal the tracklist. <a href="http://support.mixcloud.com/customer/portal/articles/1595557-us-licensing-tracklist-rules"><strong>Why?</strong></a></div>
+            </div>
+         </div>
+         <!-- ngRepeat: section in player.nowPlaying.displayTracklist -->
+         <div class="widget-tracklist-row ng-scope" ng-repeat="section in player.nowPlaying.displayTracklist">
+            <div class="widget-tracklist-number ng-binding" ng-bind="$index + 1">1</div>
+            <div class="widget-tracklist-chapter ng-hide" ng-show="!!section.chapter">
+               <div class="widget-title ng-binding" ng-bind="section.chapter"></div>
+            </div>
+            <div class="widget-tracklist-song" ng-show="!section.chapter">
+               <div class="widget-title ng-binding" ng-bind="section.title">Say Yeah (junclassic freestyling)</div>
+               <div class="widget-by"><span class="widget-by-word">by</span>&nbsp;<span class="widget-by-user ng-binding" ng-bind="section.artist">Anastrophe</span></div>
+               <a ng-href="" ng-show="section.buyUrl" m-tooltip-left="Buy track" class="buy-link ng-scope ng-hide"></a>
+            </div>
+         </div>
+         <!-- end ngRepeat: section in player.nowPlaying.displayTracklist -->
+         <div class="widget-tracklist-row ng-scope" ng-repeat="section in player.nowPlaying.displayTracklist">
+            <div class="widget-tracklist-number ng-binding" ng-bind="$index + 1">2</div>
+            <div class="widget-tracklist-chapter ng-hide" ng-show="!!section.chapter">
+               <div class="widget-title ng-binding" ng-bind="section.chapter"></div>
+            </div>
+            <div class="widget-tracklist-song" ng-show="!section.chapter">
+               <div class="widget-title ng-binding" ng-bind="section.title">Roomies Got Da Powa (AJ's Cold Crush remix - exclusive)</div>
+               <div class="widget-by"><span class="widget-by-word">by</span>&nbsp;<span class="widget-by-user ng-binding" ng-bind="section.artist">Le Serveur</span></div>
+               <a ng-href="" ng-show="section.buyUrl" m-tooltip-left="Buy track" class="buy-link ng-scope ng-hide"></a>
+            </div>
+         </div>
+         <!-- end ngRepeat: section in player.nowPlaying.displayTracklist -->
+         <div class="widget-tracklist-row ng-scope" ng-repeat="section in player.nowPlaying.displayTracklist">
+            <div class="widget-tracklist-number ng-binding" ng-bind="$index + 1">3</div>
+            <div class="widget-tracklist-chapter ng-hide" ng-show="!!section.chapter">
+               <div class="widget-title ng-binding" ng-bind="section.chapter"></div>
+            </div>
+            <div class="widget-tracklist-song" ng-show="!section.chapter">
+               <div class="widget-title ng-binding" ng-bind="section.title">Forever</div>
+               <div class="widget-by"><span class="widget-by-word">by</span>&nbsp;<span class="widget-by-user ng-binding" ng-bind="section.artist">M.A BEAT!</span></div>
+               <a ng-href="" ng-show="section.buyUrl" m-tooltip-left="Buy track" class="buy-link ng-scope ng-hide"></a>
+            </div>
+         </div>
+         <!-- end ngRepeat: section in player.nowPlaying.displayTracklist -->
+         <div class="widget-tracklist-row ng-scope" ng-repeat="section in player.nowPlaying.displayTracklist">
+            <div class="widget-tracklist-number ng-binding" ng-bind="$index + 1">4</div>
+            <div class="widget-tracklist-chapter ng-hide" ng-show="!!section.chapter">
+               <div class="widget-title ng-binding" ng-bind="section.chapter"></div>
+            </div>
+            <div class="widget-tracklist-song" ng-show="!section.chapter">
+               <div class="widget-title ng-binding" ng-bind="section.title">I Gatcha</div>
+               <div class="widget-by"><span class="widget-by-word">by</span>&nbsp;<span class="widget-by-user ng-binding" ng-bind="section.artist">The Fat Badgers</span></div>
+               <a ng-href="" ng-show="section.buyUrl" m-tooltip-left="Buy track" class="buy-link ng-scope ng-hide"></a>
+            </div>
+         </div>
+         <!-- end ngRepeat: section in player.nowPlaying.displayTracklist -->
+         <div class="widget-tracklist-row ng-scope" ng-repeat="section in player.nowPlaying.displayTracklist">
+            <div class="widget-tracklist-number ng-binding" ng-bind="$index + 1">5</div>
+            <div class="widget-tracklist-chapter ng-hide" ng-show="!!section.chapter">
+               <div class="widget-title ng-binding" ng-bind="section.chapter"></div>
+            </div>
+            <div class="widget-tracklist-song" ng-show="!section.chapter">
+               <div class="widget-title ng-binding" ng-bind="section.title">Mademoiselle (exclusive)</div>
+               <div class="widget-by"><span class="widget-by-word">by</span>&nbsp;<span class="widget-by-user ng-binding" ng-bind="section.artist">Le Serveur</span></div>
+               <a ng-href="" ng-show="section.buyUrl" m-tooltip-left="Buy track" class="buy-link ng-scope ng-hide"></a>
+            </div>
+         </div>
+         <!-- end ngRepeat: section in player.nowPlaying.displayTracklist -->
+         <div class="widget-tracklist-row ng-scope" ng-repeat="section in player.nowPlaying.displayTracklist">
+            <div class="widget-tracklist-number ng-binding" ng-bind="$index + 1">6</div>
+            <div class="widget-tracklist-chapter ng-hide" ng-show="!!section.chapter">
+               <div class="widget-title ng-binding" ng-bind="section.chapter"></div>
+            </div>
+            <div class="widget-tracklist-song" ng-show="!section.chapter">
+               <div class="widget-title ng-binding" ng-bind="section.title">Wants &amp; Needs</div>
+               <div class="widget-by"><span class="widget-by-word">by</span>&nbsp;<span class="widget-by-user ng-binding" ng-bind="section.artist">Mr Troy &amp; junclassic</span></div>
+               <a ng-href="" ng-show="section.buyUrl" m-tooltip-left="Buy track" class="buy-link ng-scope ng-hide"></a>
+            </div>
+         </div>
+         <!-- end ngRepeat: section in player.nowPlaying.displayTracklist -->
+         <div class="widget-tracklist-row ng-scope" ng-repeat="section in player.nowPlaying.displayTracklist">
+            <div class="widget-tracklist-number ng-binding" ng-bind="$index + 1">7</div>
+            <div class="widget-tracklist-chapter ng-hide" ng-show="!!section.chapter">
+               <div class="widget-title ng-binding" ng-bind="section.chapter"></div>
+            </div>
+            <div class="widget-tracklist-song" ng-show="!section.chapter">
+               <div class="widget-title ng-binding" ng-bind="section.title">Space Chick (18k Re-Freak)</div>
+               <div class="widget-by"><span class="widget-by-word">by</span>&nbsp;<span class="widget-by-user ng-binding" ng-bind="section.artist">M.A BEAT!</span></div>
+               <a ng-href="" ng-show="section.buyUrl" m-tooltip-left="Buy track" class="buy-link ng-scope ng-hide"></a>
+            </div>
+         </div>
+         <!-- end ngRepeat: section in player.nowPlaying.displayTracklist -->
+         <div class="widget-tracklist-row ng-scope" ng-repeat="section in player.nowPlaying.displayTracklist">
+            <div class="widget-tracklist-number ng-binding" ng-bind="$index + 1">8</div>
+            <div class="widget-tracklist-chapter ng-hide" ng-show="!!section.chapter">
+               <div class="widget-title ng-binding" ng-bind="section.chapter"></div>
+            </div>
+            <div class="widget-tracklist-song" ng-show="!section.chapter">
+               <div class="widget-title ng-binding" ng-bind="section.title">Halfaway</div>
+               <div class="widget-by"><span class="widget-by-word">by</span>&nbsp;<span class="widget-by-user ng-binding" ng-bind="section.artist">Anastrophe</span></div>
+               <a ng-href="" ng-show="section.buyUrl" m-tooltip-left="Buy track" class="buy-link ng-scope ng-hide"></a>
+            </div>
+         </div>
+         <!-- end ngRepeat: section in player.nowPlaying.displayTracklist -->
+         <div class="widget-tracklist-row ng-scope" ng-repeat="section in player.nowPlaying.displayTracklist">
+            <div class="widget-tracklist-number ng-binding" ng-bind="$index + 1">9</div>
+            <div class="widget-tracklist-chapter ng-hide" ng-show="!!section.chapter">
+               <div class="widget-title ng-binding" ng-bind="section.chapter"></div>
+            </div>
+            <div class="widget-tracklist-song" ng-show="!section.chapter">
+               <div class="widget-title ng-binding" ng-bind="section.title">Every Inch of Your Body</div>
+               <div class="widget-by"><span class="widget-by-word">by</span>&nbsp;<span class="widget-by-user ng-binding" ng-bind="section.artist">Leopard DaVinci</span></div>
+               <a ng-href="" ng-show="section.buyUrl" m-tooltip-left="Buy track" class="buy-link ng-scope ng-hide"></a>
+            </div>
+         </div>
+         <!-- end ngRepeat: section in player.nowPlaying.displayTracklist -->
+         <div class="widget-tracklist-row ng-scope" ng-repeat="section in player.nowPlaying.displayTracklist">
+            <div class="widget-tracklist-number ng-binding" ng-bind="$index + 1">10</div>
+            <div class="widget-tracklist-chapter ng-hide" ng-show="!!section.chapter">
+               <div class="widget-title ng-binding" ng-bind="section.chapter"></div>
+            </div>
+            <div class="widget-tracklist-song" ng-show="!section.chapter">
+               <div class="widget-title ng-binding" ng-bind="section.title">Before I leave</div>
+               <div class="widget-by"><span class="widget-by-word">by</span>&nbsp;<span class="widget-by-user ng-binding" ng-bind="section.artist">M.A BEAT!</span></div>
+               <a ng-href="" ng-show="section.buyUrl" m-tooltip-left="Buy track" class="buy-link ng-scope ng-hide"></a>
+            </div>
+         </div>
+         <!-- end ngRepeat: section in player.nowPlaying.displayTracklist -->
+         <div class="widget-tracklist-row ng-scope" ng-repeat="section in player.nowPlaying.displayTracklist">
+            <div class="widget-tracklist-number ng-binding" ng-bind="$index + 1">11</div>
+            <div class="widget-tracklist-chapter ng-hide" ng-show="!!section.chapter">
+               <div class="widget-title ng-binding" ng-bind="section.chapter"></div>
+            </div>
+            <div class="widget-tracklist-song" ng-show="!section.chapter">
+               <div class="widget-title ng-binding" ng-bind="section.title">Shine</div>
+               <div class="widget-by"><span class="widget-by-word">by</span>&nbsp;<span class="widget-by-user ng-binding" ng-bind="section.artist">Mr Troy</span></div>
+               <a ng-href="" ng-show="section.buyUrl" m-tooltip-left="Buy track" class="buy-link ng-scope ng-hide"></a>
+            </div>
+         </div>
+         <!-- end ngRepeat: section in player.nowPlaying.displayTracklist -->
+         <div class="widget-tracklist-row ng-scope" ng-repeat="section in player.nowPlaying.displayTracklist">
+            <div class="widget-tracklist-number ng-binding" ng-bind="$index + 1">12</div>
+            <div class="widget-tracklist-chapter ng-hide" ng-show="!!section.chapter">
+               <div class="widget-title ng-binding" ng-bind="section.chapter"></div>
+            </div>
+            <div class="widget-tracklist-song" ng-show="!section.chapter">
+               <div class="widget-title ng-binding" ng-bind="section.title">Snaked</div>
+               <div class="widget-by"><span class="widget-by-word">by</span>&nbsp;<span class="widget-by-user ng-binding" ng-bind="section.artist">Le Serveur &amp; M.A BEAT!</span></div>
+               <a ng-href="" ng-show="section.buyUrl" m-tooltip-left="Buy track" class="buy-link ng-scope ng-hide"></a>
+            </div>
+         </div>
+         <!-- end ngRepeat: section in player.nowPlaying.displayTracklist -->
+         <div class="widget-tracklist-row ng-scope" ng-repeat="section in player.nowPlaying.displayTracklist">
+            <div class="widget-tracklist-number ng-binding" ng-bind="$index + 1">13</div>
+            <div class="widget-tracklist-chapter ng-hide" ng-show="!!section.chapter">
+               <div class="widget-title ng-binding" ng-bind="section.chapter"></div>
+            </div>
+            <div class="widget-tracklist-song" ng-show="!section.chapter">
+               <div class="widget-title ng-binding" ng-bind="section.title">Kite Low Swim</div>
+               <div class="widget-by"><span class="widget-by-word">by</span>&nbsp;<span class="widget-by-user ng-binding" ng-bind="section.artist">M.A BEAT!</span></div>
+               <a ng-href="" ng-show="section.buyUrl" m-tooltip-left="Buy track" class="buy-link ng-scope ng-hide"></a>
+            </div>
+         </div>
+         <!-- end ngRepeat: section in player.nowPlaying.displayTracklist -->
+         <div class="widget-tracklist-row ng-scope" ng-repeat="section in player.nowPlaying.displayTracklist">
+            <div class="widget-tracklist-number ng-binding" ng-bind="$index + 1">14</div>
+            <div class="widget-tracklist-chapter ng-hide" ng-show="!!section.chapter">
+               <div class="widget-title ng-binding" ng-bind="section.chapter"></div>
+            </div>
+            <div class="widget-tracklist-song" ng-show="!section.chapter">
+               <div class="widget-title ng-binding" ng-bind="section.title">Black Kung Fu</div>
+               <div class="widget-by"><span class="widget-by-word">by</span>&nbsp;<span class="widget-by-user ng-binding" ng-bind="section.artist">Leopard DaVinci</span></div>
+               <a ng-href="" ng-show="section.buyUrl" m-tooltip-left="Buy track" class="buy-link ng-scope ng-hide"></a>
+            </div>
+         </div>
+         <!-- end ngRepeat: section in player.nowPlaying.displayTracklist -->
+         <div class="widget-tracklist-row ng-scope" ng-repeat="section in player.nowPlaying.displayTracklist">
+            <div class="widget-tracklist-number ng-binding" ng-bind="$index + 1">15</div>
+            <div class="widget-tracklist-chapter ng-hide" ng-show="!!section.chapter">
+               <div class="widget-title ng-binding" ng-bind="section.chapter"></div>
+            </div>
+            <div class="widget-tracklist-song" ng-show="!section.chapter">
+               <div class="widget-title ng-binding" ng-bind="section.title">Window</div>
+               <div class="widget-by"><span class="widget-by-word">by</span>&nbsp;<span class="widget-by-user ng-binding" ng-bind="section.artist">Mr Troy</span></div>
+               <a ng-href="" ng-show="section.buyUrl" m-tooltip-left="Buy track" class="buy-link ng-scope ng-hide"></a>
+            </div>
+         </div>
+         <!-- end ngRepeat: section in player.nowPlaying.displayTracklist -->
+         <div class="widget-tracklist-row ng-scope" ng-repeat="section in player.nowPlaying.displayTracklist">
+            <div class="widget-tracklist-number ng-binding" ng-bind="$index + 1">16</div>
+            <div class="widget-tracklist-chapter ng-hide" ng-show="!!section.chapter">
+               <div class="widget-title ng-binding" ng-bind="section.chapter"></div>
+            </div>
+            <div class="widget-tracklist-song" ng-show="!section.chapter">
+               <div class="widget-title ng-binding" ng-bind="section.title">Drunk With Maceo! (exclusive)</div>
+               <div class="widget-by"><span class="widget-by-word">by</span>&nbsp;<span class="widget-by-user ng-binding" ng-bind="section.artist">Le Serveur</span></div>
+               <a ng-href="" ng-show="section.buyUrl" m-tooltip-left="Buy track" class="buy-link ng-scope ng-hide"></a>
+            </div>
+         </div>
+         <!-- end ngRepeat: section in player.nowPlaying.displayTracklist -->
+         <div class="widget-tracklist-row ng-scope" ng-repeat="section in player.nowPlaying.displayTracklist">
+            <div class="widget-tracklist-number ng-binding" ng-bind="$index + 1">17</div>
+            <div class="widget-tracklist-chapter ng-hide" ng-show="!!section.chapter">
+               <div class="widget-title ng-binding" ng-bind="section.chapter"></div>
+            </div>
+            <div class="widget-tracklist-song" ng-show="!section.chapter">
+               <div class="widget-title ng-binding" ng-bind="section.title">Mirage Super Magic Hats (remix)</div>
+               <div class="widget-by"><span class="widget-by-word">by</span>&nbsp;<span class="widget-by-user ng-binding" ng-bind="section.artist">M.A BEAT!</span></div>
+               <a ng-href="" ng-show="section.buyUrl" m-tooltip-left="Buy track" class="buy-link ng-scope ng-hide"></a>
+            </div>
+         </div>
+         <!-- end ngRepeat: section in player.nowPlaying.displayTracklist -->
+      </div>
+      <div class="modal up-next cf ng-hide" ng-show="playerWidget.showList" m-cloudcast-list="">
+         <div m-click="playerWidget.showList = false" class="close ng-scope" m-tooltip-left="Close"></div>
+         <div class="back disabled" m-click="cloudcastList.back()" ng-class="{ disabled: cloudcastList.backDisabled }"></div>
+         <div class="next" m-click="cloudcastList.next()" ng-class="{ disabled: cloudcastList.nextDisabled }"></div>
+         <div class="up-next-cloudcast-container">
+            <div class="up-next-cloudcast-container-inner" m-list-container="" style="width: 110px; left: 0px;">
+               <!-- ngRepeat: cloudcast in playerWidget.cloudcastList -->
+               <div class="up-next-cloudcast ng-scope now-playing" ng-repeat="cloudcast in playerWidget.cloudcastList" ng-click="playerWidget.playFromList(cloudcast)" ng-class="{ 'now-playing': cloudcast.nowPlaying }">
+                  <img class="up-next-img" ng-src="//images-mix.netdna-ssl.com/w/180/h/180/q/85/upload/images/extaudio/22da84ed-c399-4fbc-b816-37b0e2f21354.png" width="90" height="90" alt="BMM Essentials" src="//images-mix.netdna-ssl.com/w/180/h/180/q/85/upload/images/extaudio/22da84ed-c399-4fbc-b816-37b0e2f21354.png">
+                  <div class="up-next-img-border"></div>
+                  <div class="up-next-title ng-binding" ng-bind="cloudcast.title">BMM Essentials</div>
+                  <div class="up-next-by">by <span ng-bind="cloudcast.owner" class="ng-binding">LDBK</span></div>
+                  <div class="up-next-play">
+                     <div class="up-next-play-icon"></div>
+                  </div>
+               </div>
+               <!-- end ngRepeat: cloudcast in playerWidget.cloudcastList -->
+            </div>
+         </div>
+      </div>
+      <div class="modal share-modal cf ng-hide" ng-show="playerWidget.showShare">
+         <div m-click="playerWidget.showShare=false" class="close ng-scope" m-tooltip-left="Close"></div>
+         <div class="share-container cf">
+            <h4 class="share-title">Share</h4>
+            <div class="share-icon fb" m-facebook-share="https://www.mixcloud.com/LaidBackRadio/bmm-essentials/" m-facebook-popup="" m-content-type="cloudcast" m-content-id="98262175" m-ref="player_widget" m-track-url="/share-dialog/facebook/trackshare/" m-click="facebookShare()"><span>Share</span></div>
+            <a ng-href="https://twitter.com/share?related=mixcloud&amp;url=https%3A%2F%2Fwww.mixcloud.com%2FLaidBackRadio%2Fbmm-essentials%2F" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;" class="share-icon twitter" href="https://twitter.com/share?related=mixcloud&amp;url=https%3A%2F%2Fwww.mixcloud.com%2FLaidBackRadio%2Fbmm-essentials%2F"><span>Twitter</span></a><a ng-href="https://plus.google.com/share?url=https%3A%2F%2Fwww.mixcloud.com%2FLaidBackRadio%2Fbmm-essentials%2F" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;" class="share-icon gplus" href="https://plus.google.com/share?url=https%3A%2F%2Fwww.mixcloud.com%2FLaidBackRadio%2Fbmm-essentials%2F"><span>Google+</span></a><a ng-href="http://www.tumblr.com/share/video/?caption=%3Ciframe+width%3D%22300%22+height%3D%22300%22+src%3D%22https%3A%2F%2Fwww.mixcloud.com%2Fwidget%2Fiframe%2F%3Fautoplay%3D%26amp%3Bembed_type%3Dwidget_standard%26amp%3Bembed_uuid%3D05b6e1a6-aae8-4777-a22c-ab3848cc16f4%26amp%3Bfeed%3D%252FLaidBackRadio%252Fbmm-essentials%252F%26amp%3Bhide_artwork%3D%26amp%3Bhide_cover%3D%26amp%3Bhide_tracklist%3D%26amp%3Blight%3D%26amp%3Bmini%3D%26amp%3Breplace%3D0%26amp%3Bstylecolor%3D%22+frameborder%3D%220%22%3E%3C%2Fiframe%3E%3Cdiv+style%3D%22clear%3Aboth%3B+height%3A3px%3B+width%3A300%3B%22%3E%3C%2Fdiv%3E%3Cp+style%3D%22display%3Ablock%3B+font-size%3A11px%3B+font-family%3A+%27Open+Sans%27%2C+Helvetica%2C+Arial%2C+sans-serif%3B+margin%3A0%3B+padding%3A+3px+4px%3B+color%3A%23999%3B+width%3A300%3B%22%3E%3Ca+href%3D%22https%3A%2F%2Fwww.mixcloud.com%2FLaidBackRadio%2Fbmm-essentials%2F%3Futm_source%3Dwidget%26amp%3Butm_medium%3Dweb%26amp%3Butm_campaign%3Dbase_links%26amp%3Butm_term%3Dresource_link%22+target%3D%22_blank%22+style%3D%22color%3A%23808080%3B+font-weight%3Abold%3B%22%3EBMM+Essentials%3C%2Fa%3E%3Cspan%3E+by+%3C%2Fspan%3E%3Ca+href%3D%22https%3A%2F%2Fwww.mixcloud.com%2FLaidBackRadio%2F%3Futm_source%3Dwidget%26amp%3Butm_medium%3Dweb%26amp%3Butm_campaign%3Dbase_links%26amp%3Butm_term%3Dprofile_link%22+target%3D%22_blank%22+style%3D%22color%3A%23808080%3B+font-weight%3Abold%3B%22%3ELdbk%3C%2Fa%3E%3Cspan%3E+on+%3C%2Fspan%3E%3Ca+href%3D%22https%3A%2F%2Fwww.mixcloud.com%2F%3Futm_source%3Dwidget%26amp%3Butm_medium%3Dweb%26amp%3Butm_campaign%3Dbase_links%26amp%3Butm_term%3Dhomepage_link%22+target%3D%22_blank%22+style%3D%22color%3A%23808080%3B+font-weight%3Abold%3B%22%3E+Mixcloud%3C%2Fa%3E%3C%2Fp%3E%3Cdiv+style%3D%22clear%3Aboth%3B+height%3A3px%3B%22%3E%3C%2Fdiv%3E&amp;tags=Mixcloud%2C+LDBK" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;" class="share-icon tumblr" href="http://www.tumblr.com/share/video/?caption=%3Ciframe+width%3D%22300%22+height%3D%22300%22+src%3D%22https%3A%2F%2Fwww.mixcloud.com%2Fwidget%2Fiframe%2F%3Fautoplay%3D%26amp%3Bembed_type%3Dwidget_standard%26amp%3Bembed_uuid%3D05b6e1a6-aae8-4777-a22c-ab3848cc16f4%26amp%3Bfeed%3D%252FLaidBackRadio%252Fbmm-essentials%252F%26amp%3Bhide_artwork%3D%26amp%3Bhide_cover%3D%26amp%3Bhide_tracklist%3D%26amp%3Blight%3D%26amp%3Bmini%3D%26amp%3Breplace%3D0%26amp%3Bstylecolor%3D%22+frameborder%3D%220%22%3E%3C%2Fiframe%3E%3Cdiv+style%3D%22clear%3Aboth%3B+height%3A3px%3B+width%3A300%3B%22%3E%3C%2Fdiv%3E%3Cp+style%3D%22display%3Ablock%3B+font-size%3A11px%3B+font-family%3A+%27Open+Sans%27%2C+Helvetica%2C+Arial%2C+sans-serif%3B+margin%3A0%3B+padding%3A+3px+4px%3B+color%3A%23999%3B+width%3A300%3B%22%3E%3Ca+href%3D%22https%3A%2F%2Fwww.mixcloud.com%2FLaidBackRadio%2Fbmm-essentials%2F%3Futm_source%3Dwidget%26amp%3Butm_medium%3Dweb%26amp%3Butm_campaign%3Dbase_links%26amp%3Butm_term%3Dresource_link%22+target%3D%22_blank%22+style%3D%22color%3A%23808080%3B+font-weight%3Abold%3B%22%3EBMM+Essentials%3C%2Fa%3E%3Cspan%3E+by+%3C%2Fspan%3E%3Ca+href%3D%22https%3A%2F%2Fwww.mixcloud.com%2FLaidBackRadio%2F%3Futm_source%3Dwidget%26amp%3Butm_medium%3Dweb%26amp%3Butm_campaign%3Dbase_links%26amp%3Butm_term%3Dprofile_link%22+target%3D%22_blank%22+style%3D%22color%3A%23808080%3B+font-weight%3Abold%3B%22%3ELdbk%3C%2Fa%3E%3Cspan%3E+on+%3C%2Fspan%3E%3Ca+href%3D%22https%3A%2F%2Fwww.mixcloud.com%2F%3Futm_source%3Dwidget%26amp%3Butm_medium%3Dweb%26amp%3Butm_campaign%3Dbase_links%26amp%3Butm_term%3Dhomepage_link%22+target%3D%22_blank%22+style%3D%22color%3A%23808080%3B+font-weight%3Abold%3B%22%3E+Mixcloud%3C%2Fa%3E%3C%2Fp%3E%3Cdiv+style%3D%22clear%3Aboth%3B+height%3A3px%3B%22%3E%3C%2Fdiv%3E&amp;tags=Mixcloud%2C+LDBK"><span>Tumblr</span></a><a ng-href="mailto:?body=Check+out+%22BMM+Essentials%22+on+Mixcloud+https%3A%2F%2Fwww.mixcloud.com%2FLaidBackRadio%2Fbmm-essentials%2F&amp;subject=BMM+Essentials+-+Mixcloud" class="share-icon email last" href="mailto:?body=Check+out+%22BMM+Essentials%22+on+Mixcloud+https%3A%2F%2Fwww.mixcloud.com%2FLaidBackRadio%2Fbmm-essentials%2F&amp;subject=BMM+Essentials+-+Mixcloud"><span>Email</span></a>
+         </div>
+         <div class="share-container cf">
+            <h4 class="share-title">URL</h4>
+            <input type="text" ng-model="player.currentCloudcast.shareUrl" class="embed-input ng-pristine ng-valid" id="" readonly="readonly" m-click-select="">
+         </div>
+         <div class="share-container cf">
+            <h4 class="share-title">Embed</h4>
+            <input type="text" ng-model="player.currentCloudcast.embedCode" class="embed-input ng-pristine ng-valid" id="" readonly="readonly" m-click-select="">
+         </div>
+      </div>
+   </div>
+</div>
